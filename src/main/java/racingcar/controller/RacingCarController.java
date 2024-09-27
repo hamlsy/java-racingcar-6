@@ -5,7 +5,9 @@ import racingcar.domain.RacingGame;
 import racingcar.service.RacingCarService;
 import racingcar.utils.Utils;
 import racingcar.view.InputView;
+import racingcar.view.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,16 +24,16 @@ public class RacingCarController {
 
     //todo start controller
     public void run(){
-        //initRacing
-        //start racing
+        initRacing();
+        startRacing();
         //after racing
     }
 
 
     //todo impl initRacing
-    public void initRacing(){
+    private void initRacing(){
         InputView.printInputCarNameMessage();
-        createRacingCar(inputRacingCarName());
+        racingCars = createRacingCar(inputRacingCarName());
         InputView.printInputGameCountMessage();
         createRacingGame(racingCars, inputGameCount());
     }
@@ -57,6 +59,11 @@ public class RacingCarController {
 
     //todo impl startRacing
     public void startRacing(){
+        for(int i=0; i < racingGame.getGameCount(); i++){
+            racingCars = service.startRacing(racingCars);
+            OutputView.printAllRacingCarsFowardResult(racingCars);
+            System.out.println("\n");
+        }
 
     }
 
